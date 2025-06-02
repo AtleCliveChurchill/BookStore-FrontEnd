@@ -37,9 +37,11 @@ export default function AddEdit() {
 
         try {
             if (isEdit) {
-                await axios.put(`http://localhost:5000/api/books/${id}`, book);
+                // await axios.put(`http://localhost:5000/api/books/${id}`, book);
+                await axios.put(`https://book-store-back-end-khaki.vercel.app/api/books/${id}`, book);
             } else {
-                await axios.post('http://localhost:5000/api/books', book);
+                // await axios.post('http://localhost:5000/api/books', book);
+                await axios.post('https://book-store-back-end-khaki.vercel.app/api/books', book);
             }
             navigate('/');
         } catch (error) {
@@ -49,7 +51,8 @@ export default function AddEdit() {
 
     const fetchBook = async () => {
         try {
-            const res = await axios.get(`http://localhost:5000/api/books/${id}`);
+            // const res = await axios.get(`http://localhost:5000/api/books/${id}`);
+            const res = await axios.get(`https://book-store-back-end-khaki.vercel.app/api/books/${id}`);
             setBook(res.data);
         } catch (err) {
             setApiError("Failed to fetch book.");
