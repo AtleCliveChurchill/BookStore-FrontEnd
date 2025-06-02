@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 export default function AddEdit() {
     const { id } = useParams();
     const [book, setBook] = useState({
@@ -38,10 +40,10 @@ export default function AddEdit() {
         try {
             if (isEdit) {
                 // await axios.put(`http://localhost:5000/api/books/${id}`, book);
-                await axios.put(`https://book-store-back-end-khaki.vercel.app/api/books/${id}`, book);
+                await axios.put(`${API_BASE_URL}/books/${id}`, book);
             } else {
                 // await axios.post('http://localhost:5000/api/books', book);
-                await axios.post('https://book-store-back-end-khaki.vercel.app/api/books', book);
+                await axios.post(`${API_BASE_URL}/books`, book);
             }
             navigate('/');
         } catch (error) {
@@ -52,7 +54,7 @@ export default function AddEdit() {
     const fetchBook = async () => {
         try {
             // const res = await axios.get(`http://localhost:5000/api/books/${id}`);
-            const res = await axios.get(`https://book-store-back-end-khaki.vercel.app/api/books/${id}`);
+            const res = await axios.get(`${API_BASE_URL}/books/${id}`);
             setBook(res.data);
         } catch (err) {
             setApiError("Failed to fetch book.");

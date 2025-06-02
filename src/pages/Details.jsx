@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 export default function BookDetails() {
     const { id } = useParams();
     const [book, setBook] = useState(null);
@@ -11,8 +13,7 @@ export default function BookDetails() {
     useEffect(() => {
         const fetchBook = async () => {
             try {
-                // const res = await axios.get(`http://localhost:5000/api/books/${id}`);
-                const res = await axios.get(`https://book-store-back-end-khaki.vercel.app/api/books/${id}`);
+                const res = await axios.get(`${API_BASE_URL}/books/${id}`);
                 setBook(res.data);
             } catch (err) {
                 setError(err.response?.data?.message || "Failed to load book.");
@@ -24,7 +25,7 @@ export default function BookDetails() {
     const handleDelete = async () => {
         if (window.confirm("Are you sure you want to delete this book?")) {
             // await axios.delete(`http://localhost:5000/api/books/${id}`);
-            await axios.delete(`https://book-store-back-end-khaki.vercel.app/api/books/${id}`);
+            await axios.delete(`${API_BASE_URL}/books/${id}`);
             navigate('/');
         }
     };
