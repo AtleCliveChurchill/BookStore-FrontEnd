@@ -9,7 +9,8 @@ export default function Home() {
     const [search, setSearch] = useState('');
 
     const fetchBooks = async () => {
-        const res = await axios.get('http://localhost:5000/api/books', {
+        // const res = await axios.get('http://localhost:5000/api/books', {
+        const res = await axios.get('https://book-store-back-end-khaki.vercel.app/api/books', {
             params: { search, page }
         });
         setBooks(res.data.books);
